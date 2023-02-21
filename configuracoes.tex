@@ -1,7 +1,7 @@
 \usepackage{CJKutf8}
 \usepackage{indentfirst}
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper, left=25mm, right = 8mm, top = 22mm, bottom = 35 mm]{geometry}
+\usepackage[a4paper, left=20mm, right = 8mm, top = 22mm, bottom = 35 mm]{geometry}
 \usepackage{helvet}
 \renewcommand\familydefault{\sfdefault}
 %\usepackage[titletoc,toc,page]{appendix}
@@ -11,13 +11,31 @@
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{4}
 %\usepackage{sectsty}
-\usepackage{hyperref}
-\usepackage{xcolor}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[dvipsnames]{xcolor}
+%setup new colors
+\hypersetup{
+	linkcolor=RawSienna
+	,citecolor=ForestGreen
+	,filecolor=Mulberry
+	,urlcolor=NavyBlue
+	,menucolor=BrickRed
+	,runcolor=Mulberry
+	,linkbordercolor=BrickRed
+	,citebordercolor=Green
+	,filebordercolor=Mulberry
+	,urlbordercolor=NavyBlue
+	,menubordercolor=BrickRed
+	,runbordercolor=Mulberry
+}
+
 \usepackage{graphicx}
 \usepackage[portuges]{babel}
 \usepackage{lastpage}
 
 \usepackage{tikz}
+\usetikzlibrary{calc,spy}
+\usetikzlibrary{decorations.pathmorphing}
 
 \usepackage{draftwatermark}
 %\SetWatermarkText{
@@ -38,7 +56,12 @@
 \let\theglossary\relax
 \let\endtheglossary\relax
 
+\usepackage[framemethod=tikz]{mdframed}
+
+%\usepackage[noredefwarn]{glossaries}
+
 \usepackage[noredefwarn]{glossaries}
+\renewcommand*{\glstextformat}[1]{\textcolor{green!60!black}{#1}}
 
 
 \usepackage{fancyhdr}
@@ -56,7 +79,7 @@
 %\fancyhead[RE,LO]{\small Regras oficiais do Softbol 2018-2021}
 %\fancyfoot[LE][RO]{}
 %\fancyfoot[LO][RE]{}
-\lfoot{eek.centralgloria@gmail.com}
+\lfoot{emilio.e.k@gmail.com}
 \cfoot{WBSC - ASB}
 \rfoot{\thepage\ de \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -96,19 +119,22 @@
 % Modifica o espaçamento no sumário
 % Nao ha espacos, exceto para as entradas de capitulos
 % \setlength{\cftbeforeparagraphskip}{0pt}
-% \setlength{\cftbeforesubsectionskip}{0pt}
-% \setlength{\cftbeforesectionskip}{0pt}
-% \setlength{\cftbeforesubsubsectionskip}{0pt}
- \setlength{\cftbeforechapterskip}{\onelineskip}
+\setlength{\cftbeforesubsectionskip}{-2pt}
+\setlength{\cftbeforesectionskip}{3pt}
+\setlength{\cftbeforesubsubsectionskip}{0pt}
+\setlength{\cftbeforechapterskip}{-5pt}%\onelineskip}
 
 
 \usepackage{titlesec}
-\titleformat{\chapter}{\normalfont\Large}{\bfseries\thechapter.}{18pt}{\bfseries}
-
-
+\titleformat{\chapter}{\normalfont\large}{\bfseries\thechapter.}{18pt}{\bfseries}
 \titleformat*{\section}{\large}
 \titleformat*{\subsection}{\normalsize\bfseries}
 \titleformat*{\subsubsection}{\normalsize}
+
+\titlespacing\section{0pt}{12pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{1pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{1pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+
 
 %\sectionfont{\fontsize{12}{15}\selectfont}
 %\subsectionfont{\fontsize{11}{15}\selectfont}
@@ -118,7 +144,7 @@
 %\setenumerate{itemsep=5mm,topsep=-1mm}
 
 \usepackage[portuges]{minitoc}
-\mtcsetoffset{minitoc}{30pt}
+\mtcsetoffset{minitoc}{10pt}
 \nomtcrule
 
 \newcounter{Examplecount}
@@ -139,11 +165,11 @@
 					Exemplo \arabic{Examplecount}: }}%}
 			\par }
 		{\vspace{2mm}
-	 	\end{minipage}
+		\end{minipage}
 	\end{lrbox}%
 	\colorbox{MyGray}{\usebox{\@tempboxa}}
 	\hspace{\stretch{1}}\rule{1 mm}{1 mm}
-	}
+}
 \makeatother
 %-----------------------------------------------
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -170,3 +196,182 @@
 	%\hspace{\stretch{1}}\rule{1 mm}{1 mm}
 }\makeatother
 %-----------------------------------------------
+
+\selectlanguage{portuges}
+%\renewcommand{\sectionname}{SEC\c{C}\~AO}
+%\fancyhead[R]{\overview}\mbox{}\newpage % This produces the overview page
+%\fancyhead[R]{} % Front matter may follow here
+%\clearpage
+%\fancyhead[RE]{\rightmark}
+%\fancyhead[RO]{\rblob}
+%\fancyhead[LE]{\lblob}
+%\fancyhead[LO]{{\leftmark}}
+
+
+\renewcommand{\appendixname}{AP\^ENDICE}
+\setlist[enumerate]{topsep=1mm,itemsep=1.75mm,partopsep=1.5mm,parsep=.5mm}
+% Alteração da indentação dos itens do sumário
+\cftsetindents{chapter}{0pt}{62pt}
+\cftsetindents{section}{0pt}{45pt}
+\cftsetindents{subsection}{7pt}{50pt}
+\cftsetindents{subsubsection}{14pt}{55pt}
+
+\abnormalparskip{8pt}
+
+
+
+\usepackage{etoc}
+\etocsetstyle{section}
+{}
+{\etocifnumbered
+	{\etocsavedsectiontocline{\numberline{\etocnumber}\etocname}{\etocpage}}
+	{\etocsavedsectiontocline{\numberline{}\etocname}{\etocpage}}%
+}
+{}
+{}
+
+\setlength{\lineskip}{3pt plus 4pt minus 0pt}
+\lineskiplimit=\baselineskip
+
+
+\usepackage{soul}
+\sethlcolor{lightgray}
+
+\makeatletter
+
+\newcommand{\defhighlighter}[3][]{%
+	\tikzset{every highlighter/.style={color=#2, fill opacity=#3, #1}}%
+}
+
+\defhighlighter{blue!30}{.3}
+
+\newcommand{\highlight@DoHighlight}{
+	\fill [ decoration = {random steps, amplitude=1pt, segment length=15pt}
+	, outer sep = -15pt, inner sep = 0pt, decorate
+	, every highlighter, this highlighter ]
+	($(begin highlight)+(0,8pt)$) rectangle ($(end highlight)+(0,-3pt)$) ;
+}
+
+\newcommand{\highlight@BeginHighlight}{
+	\coordinate (begin highlight) at (0,0) ;
+}
+
+\newcommand{\highlight@EndHighlight}{
+	\coordinate (end highlight) at (0,0) ;
+}
+
+\newdimen\highlight@previous
+\newdimen\highlight@current
+
+\DeclareRobustCommand*\highlight[1][]{%
+	\tikzset{this highlighter/.style={#1}}%
+	\SOUL@setup
+	%
+	\def\SOUL@preamble{%
+		\begin{tikzpicture}[overlay, remember picture]
+		\highlight@BeginHighlight
+		\highlight@EndHighlight
+		\end{tikzpicture}%
+	}%
+	%
+	\def\SOUL@postamble{%
+		\begin{tikzpicture}[overlay, remember picture]
+		\highlight@EndHighlight
+		\highlight@DoHighlight
+		\end{tikzpicture}%
+	}%
+	%
+	\def\SOUL@everyhyphen{%
+		\discretionary{%
+			\SOUL@setkern\SOUL@hyphkern
+			\SOUL@sethyphenchar
+			\tikz[overlay, remember picture] \highlight@EndHighlight ;%
+		}{%
+		}{%
+			\SOUL@setkern\SOUL@charkern
+		}%
+	}%
+	%
+	\def\SOUL@everyexhyphen##1{%
+		\SOUL@setkern\SOUL@hyphkern
+		\hbox{##1}%
+		\discretionary{%
+			\tikz[overlay, remember picture] \highlight@EndHighlight ;%
+		}{%
+		}{%
+			\SOUL@setkern\SOUL@charkern
+		}%
+	}%
+	%
+	\def\SOUL@everysyllable{%
+		\begin{tikzpicture}[overlay, remember picture]
+		\path let \p0 = (begin highlight), \p1 = (0,0) in \pgfextra
+		\global\highlight@previous=\y0
+		\global\highlight@current =\y1
+		\endpgfextra (0,0) ;
+		\ifdim\highlight@current < \highlight@previous
+		\highlight@DoHighlight
+		\highlight@BeginHighlight
+		\fi
+		\end{tikzpicture}%
+		\the\SOUL@syllable
+		\tikz[overlay, remember picture] \highlight@EndHighlight ;%
+	}%
+	\SOUL@
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Grid com coordenadas
+
+\makeatletter
+\def\grd@save@target#1{%
+	\def\grd@target{#1}}
+\def\grd@save@start#1{%
+	\def\grd@start{#1}}
+\tikzset{
+	grid with coordinates/.style={
+		to path={%
+			\pgfextra{%
+				\edef\grd@@target{(\tikztotarget)}%
+				\tikz@scan@one@point\grd@save@target\grd@@target\relax
+				\edef\grd@@start{(\tikztostart)}%
+				\tikz@scan@one@point\grd@save@start\grd@@start\relax
+				\draw[minor help lines] (\tikztostart) grid (\tikztotarget);
+				\draw[major help lines] (\tikztostart) grid (\tikztotarget);
+				\grd@start
+				\pgfmathsetmacro{\grd@xa}{\the\pgf@x/1cm}
+				\pgfmathsetmacro{\grd@ya}{\the\pgf@y/1cm}
+				\grd@target
+				\pgfmathsetmacro{\grd@xb}{\the\pgf@x/1cm}
+				\pgfmathsetmacro{\grd@yb}{\the\pgf@y/1cm}
+				\pgfmathsetmacro{\grd@xc}{\grd@xa + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+				\pgfmathsetmacro{\grd@yc}{\grd@ya + \pgfkeysvalueof{/tikz/grid with coordinates/major step}}
+				\foreach \x in {\grd@xa,\grd@xc,...,\grd@xb}
+				\node[anchor=north] at (\x,\grd@ya) {\scriptsize \pgfmathprintnumber{\x}};
+				\foreach \y in {\grd@ya,\grd@yc,...,\grd@yb}
+				\node[anchor=east] at (\grd@xa,\y) {\scriptsize \pgfmathprintnumber{\y}};
+			}
+		}
+	},
+	minor help lines/.style={
+		help lines,
+		step=\pgfkeysvalueof{/tikz/grid with coordinates/minor step}
+	},
+	major help lines/.style={
+		help lines,
+		line width=\pgfkeysvalueof{/tikz/grid with coordinates/major line width},
+		step=\pgfkeysvalueof{/tikz/grid with coordinates/major step}
+	},
+	grid with coordinates/.cd,
+	minor step/.initial=2,
+	major step/.initial=10,
+	major line width/.initial=1pt,
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pdflscape}
+

@@ -1,0 +1,14 @@
+# LateX auxiliary files
+*.bbl 
+*.log
+*.toc
+*.glo
+*.ist
+*.mtc
+*.aux
+*.maf
+*.ntc9
+*.out
+main.synctex.gz
+main.pdf
+
